@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>MINECRAFT</h1>
+
+    <section class="portada">
+        <!-- <img id="port1" src="/Recursos/img/portada1.webp" alt="">
+        <img id="port2" src="/Recursos/img/portada1.webp" alt=""> -->
+    </section>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/GLTFLoader.js"></script>
+    <script>
+        // Configuración básica de la escena
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Agregar luz ambiental
+        const light = new THREE.AmbientLight(0xffffff, 1); // Luz blanca
+        scene.add(light);
+
+        // Cargar el modelo GLTF
+        const loader = new THREE.GLTFLoader();
+        loader.load('/modelos 3D/scene.gltf', function (gltf) {
+            gltf.scene.scale.set(0.3, 0.3, 0.3); // Escala el modelo
+            scene.add(gltf.scene);
+            camera.position.z = 5;
+
+            function animate() {
+                requestAnimationFrame(animate);
+                renderer.render(scene, camera);
+            }
+            animate();
+        }, undefined, function (error) {
+            console.error('Error al cargar el modelo:', error);
+        });
+    </script>
+</body>
+</html>
